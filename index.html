@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Store with AR Info</title>
+    <title>3D Model Store</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer"></script>
     <style>
         body {
@@ -12,6 +12,7 @@
         }
         .container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 50px;
             margin-top: 20px;
@@ -39,58 +40,59 @@
             display: block;
             margin: 10px auto;
         }
-        .hotspot {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
 
-    <h1>3D Model Store with AR Info</h1>
+    <h1>3D Model Store</h1>
 
     <div class="container">
+
+        <!-- 🔹 Model 1 -->
         <div class="card">
             <model-viewer 
-                id="modelViewer"
-                src="model1.glb"  
+                id="modelViewer1"
+                src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"  
                 ar 
                 ar-modes="webxr scene-viewer quick-look"
                 camera-controls 
                 auto-rotate 
                 style="width: 100%; height: 300px;"
-                ar-placement="wall">  
+                ar-status="not-presenting"
+                @ar-status-changed="toggleHotspots('modelViewer1')">
                 
-                <!-- 🔹 AR Hotspots for Information -->
-                <button class="hotspot" slot="hotspot-1" data-position="0 1.5 0" data-normal="0 1 0">
-                    <span>Material: Bronze</span>
-                </button>
-
-                <button class="hotspot" slot="hotspot-2" data-position="0.5 1 0" data-normal="0 1 0">
-                    <span>Height: 1.2m</span>
+                <button class="hotspot" id="hotspot1" slot="hotspot-1" data-position="0 1.5 0" data-normal="0 1 0" style="display: none;">
+                    <span>THIS IS MY PRODUCT</span>
                 </button>
 
             </model-viewer>
-
-            <h3>My 3D Model</h3>
-            <p>High-quality 3D model perfect for decor.</p>
-            <p class="price">$149.99</p>
+            <h3>Astronaut Model</h3>
+            <p>Realistic astronaut in space suit.</p>
+            <p class="price">$199.99</p>
             <button class="order-btn">Order Now</button>
-            <button class="ar-btn" onclick="enterAR()">View in AR</button> <!-- 🔹 AR button -->
+            <button class="ar-btn" onclick="enterAR('modelViewer1')">View in AR</button>
         </div>
+
     </div>
 
     <script>
-        function enterAR() {
-            const modelViewer = document.getElementById("modelViewer");
+        function enterAR(modelId) {
+            const modelViewer = document.getElementById(modelId);
             if (modelViewer.canActivateAR) {
                 modelViewer.activateAR();
             } else {
                 alert("AR mode is not supported on this device.");
+            }
+        }
+
+        function toggleHotspots(modelId) {
+            const modelViewer = document.getElementById(modelId);
+            const hotspot = document.getElementById("hotspot1");
+
+            if (modelViewer.arStatus === "presenting") {
+                hotspot.style.display = "block"; // Show in AR mode
+            } else {
+                hotspot.style.display = "none"; // Hide in normal mode
             }
         }
     </script>
