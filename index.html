@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Store</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 20px;
+        }
+        .card {
+            text-align: center;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .price {
+            color: orange;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .order-btn {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>3D Model Store</h1>
+
+    <div class="container">
+        <!-- Model 1 -->
+        <div class="card">
+            <model-viewer 
+                src="https://modelviewer.dev/shared-assets/models/Astronaut.glb" 
+                ar 
+                ar-modes="webxr scene-viewer quick-look"
+                camera-controls 
+                auto-rotate 
+                style="width: 100%; height: 300px;">
+            </model-viewer>
+            <h3>3D Sculpture 1</h3>
+            <p>High-quality sculpture perfect for decor.</p>
+            <p class="price">$149.99</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+
+        <!-- Model 2 -->
+        <div class="card">
+            <model-viewer 
+                src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" 
+                ar 
+                ar-modes="webxr scene-viewer quick-look"
+                camera-controls 
+                auto-rotate 
+                style="width: 100%; height: 300px;">
+            </model-viewer>
+            <h3>3D Sculpture 2</h3>
+            <p>Beautiful art piece made with precision.</p>
+            <p class="price">$199.99</p>
+            <button class="order-btn">Order Now</button>
+        </div>
+    </div>
+
+</body>
+</html>
